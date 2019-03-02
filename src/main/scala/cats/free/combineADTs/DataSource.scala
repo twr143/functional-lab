@@ -1,7 +1,7 @@
-package free.combineADTs
+package cats.free.combineADTs
 import cats.free.Free
 import cats.{Id, InjectK, ~>}
-import free.combineADTs.DTs._
+import cats.free.combineADTs.DTs._
 /**
   * Created by Ilya Volynin on 01.03.2019 at 15:43.
   */

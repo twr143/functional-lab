@@ -1,5 +1,4 @@
-package free
-import cats.free.Free
+package cats.free
 import cats.free.Free.liftF
 
 /**

@@ -1,4 +1,4 @@
-package example
+package cats.example
 import cats._, cats.instances.all._
 import cats.syntax.functor._
 object Hello extends App {

@@ -1,4 +1,4 @@
-package free
+package cats.free
 import cats.data.State
 
 /**
@@ -6,9 +6,7 @@ import cats.data.State
   */
 import cats.arrow.FunctionK
 import cats.{Id, ~>}
-import cats.free.Free
-import cats.free.Free.liftF
-import free.KVStore._
+import cats.free.KVStore._
 
 import scala.collection.mutable
 

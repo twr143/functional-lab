@@ -1,4 +1,4 @@
-package example
+package cats.example
 
 import org.scalatest._
 

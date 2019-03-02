@@ -1,7 +1,7 @@
-package free.combineADTs
+package cats.free.combineADTs
 import cats.free.Free
 import cats.{Id, ~>}
-import free.combineADTs.DTs._
+import cats.free.combineADTs.DTs._
 
 import scala.collection.mutable.ListBuffer
 

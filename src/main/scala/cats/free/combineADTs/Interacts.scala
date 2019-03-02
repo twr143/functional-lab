@@ -1,9 +1,9 @@
-package free.combineADTs
+package cats.free.combineADTs
 
 import cats.data.EitherK
 import cats.free.Free
 import cats.{Id, InjectK, ~>}
-import free.combineADTs.DTs._
+import cats.free.combineADTs.DTs._
 
 import scala.collection.mutable.ListBuffer
 /**
