@@ -1,6 +1,5 @@
 package frees.demo
 import freestyle.free.module
-import cats.implicits._
 import freestyle.free.implicits._
 import freestyle.free._
 
