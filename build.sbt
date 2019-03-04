@@ -12,6 +12,7 @@ libraryDependencies += "org.typelevel" %% "cats-effect" % catsVersion
 libraryDependencies += "com.chuusai" %% "shapeless" % "2.3.3"
 libraryDependencies += "io.frees" %% "frees-core" % freesVersion
 libraryDependencies += "io.frees" %% "frees-logging" % freesVersion
+libraryDependencies += "io.frees" %% "frees-effects" % freesVersion
 libraryDependencies += scalaTest % Test
 addCompilerPlugin("org.scalameta" %% "paradise" % "3.0.0-M11" cross CrossVersion.full)
 addCompilerPlugin("org.spire-math" %% "kind-projector" % "0.9.9")
