@@ -1,5 +1,6 @@
-package frees.validInterp
-
+package frees.validInterp.entries
+import frees.validInterp.{App, Interaction, Validation}
+import freestyle.free.logging.LoggingM
 import freestyle.free._
 import freestyle.free.implicits._
 import freestyle.free.logging._
@@ -22,22 +23,17 @@ object CombinedVIEntry {
       userInput <- interaction.ask("Give me something with at least 3 chars and a number on it")
       valid     <- (validation.minSize(userInput, 3), validation.hasNumber(userInput)).mapN(_ && _)
       _         <- if (valid)
-                      interaction.tell("awesomesauce!")
+                      interaction.tell("valid and good input!")
                    else
                       interaction.tell(s"$userInput is not valid")
       _         <- log.debug("Program finished")
     } yield ()
   }
 
-  @module trait App {
-    val interaction: Interaction.StackSafe
-    val validation: Validation.StackSafe
-    val log: LoggingM
-  }
-
   def main(args: Array[String]): Unit = {
-    import Handlers._
     import cats.implicits._
+    import freestyle.free._
+    import frees.validInterp.Handlers._
     taglessProgram[App.Op].interpret[Try]
   }
 }

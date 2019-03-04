@@ -1,8 +1,8 @@
-package frees.validInterp
-import cats._
-import cats.free.Free
+package frees.validInterp.entries
+import cats.Monad
+import frees.validInterp.{Handlers, Interaction, Validation}
+import freestyle.free._
 import cats.implicits._
-
 import scala.util.Try
 
 /**
@@ -21,9 +21,8 @@ object VIEntry {
     } yield ()
 
   def main(args: Array[String]): Unit = {
-    import freestyle.tagless._
     import Handlers._
     taglessProgram[Try]
-//    taglessProgram[Free[Try, ?]].runTailRec    //how to inject?
+    //    taglessProgram[Free[Try, ?]].runTailRec    //how to inject?
   }
 }
