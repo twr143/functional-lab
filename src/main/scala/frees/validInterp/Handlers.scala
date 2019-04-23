@@ -1,9 +1,12 @@
 package frees.validInterp
+import scala.util.Success
+
 /**
   * Created by Ilya Volynin on 03.03.2019 at 15:25.
   */
 object Handlers {
   import scala.util.Try
+
   // import scala.util.Try
   implicit val validationHandler = new Validation.Handler[Try] {
     override def minSize(s: String, n: Int): Try[Boolean] = Try(s.size >= n)
@@ -14,7 +17,10 @@ object Handlers {
   implicit val interactionHandler = new Interaction.Handler[Try] {
     override def tell(s: String): Try[Unit] = Try(println(s))
 
-    override def ask(s: String): Try[String] = Try("This could have been user input 1")
+    override def ask(s: String): Try[String] = {
+      println("please enter some input")
+      Success(scala.io.StdIn.readLine())
+    }
   }
 
   implicit val validationHandlerOpt = new Validation.Handler[Option] {
@@ -39,7 +45,6 @@ object Handlers {
     else Left(throw new Exception(s"the size ${s.size} is less than $n"))
 
     override def hasNumber(s: String): Target[Boolean] = if (s.matches(".*\\d.*")) Right(true)
-
     else Left(throw new Exception(s" $s doesn't contain numbers"))
   }
 
