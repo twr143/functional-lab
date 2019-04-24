@@ -23,15 +23,14 @@ object TryE1 {
       userInput <- interaction.ask("Give me something with at least 3 chars and a number on it")
       rules <- validation.rules
       msgs = rules.foldLeft(Set.empty[String])((currentErrors, rule) =>
-        currentErrors ++ {
-          (rule(userInput))
-        }.toOption)
+        currentErrors ++
+          rule(userInput).toOption)
 
        _ <- if (msgs.isEmpty)
 
-      interaction.tell("valid and good input!")
+      interaction.tell(s"${userInput} is a valid and good input!")
       else
-      interaction.tell(s"$userInput is not valid, $msgs")
+      interaction.tell(s""""${userInput}" is not valid, the errors are:  $msgs""" )
         _ <- log.debug("Program finished")
     } yield ()
   }
