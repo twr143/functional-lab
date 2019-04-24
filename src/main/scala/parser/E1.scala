@@ -9,12 +9,14 @@ object E1 {
            functions: String => Double => Double = Map.empty) = {
     FormulaParser(code).fold(
       error => println(s"\'$code\' parsing error: $error"),
-      expr =>
+      expr => {
         variables.map { v =>
           val d = Evaluator(expr, v, functions)
           println(s"\'$code\'($v) = $d")
-        })
-    println()
+        }
+        println()
+      }
+    )
   }
 
   def main(args: Array[String]): Unit = {
