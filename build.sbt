@@ -2,7 +2,7 @@ import Dependencies._
 
 val catsVersion = "1.1.0"
 val freesVersion = "0.8.2"
-organization := "com.cats.example"
+organization := "com.iv"
 scalaVersion := "2.12.6"
 version := "0.1.0-SNAPSHOT"
 name := "functional-lab"
