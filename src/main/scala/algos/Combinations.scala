@@ -53,14 +53,14 @@ object Combinations {
     val l = List(1, 2, 3, 4, 5)
 
     def f(implicit agg: ListBuffer[List[Int]]): (List[Int]) => Unit =
-      l => agg.append(l)
+      l => agg += l
 
-    implicit var agg = ListBuffer.empty[List[Int]]
+    implicit val agg = ListBuffer.empty[List[Int]]
+    println("perms")
     nonRepeatingPerm(l, 5, f)
     println(agg.map(_.foldLeft("")(_ + _)).sortWith((a, b) => a < b))
     println(agg.size)
-
-    agg = ListBuffer.empty[List[Int]]
+    agg.clear()
     nonRepeatingComb(l, 3, f)
     println("now combs")
     println(agg.map(_.foldLeft("")(_ + _)).sortWith((a, b) => a < b))
