@@ -28,13 +28,13 @@ object CombSplit {
     def isSorted(implicit ord: Ordering[T]): Boolean = s match {
       case Seq() => true
       case Seq(_) => true
-      case _ => s.sliding(2).forall { case Seq(x, y) => ord.lt(x, y) }
+      case s2 => s2.sliding(2).forall { case Seq(x, y) => ord.lt(x, y) }
     }
   }
 
   def main(args: Array[String]): Unit = {
     //choosing three groups of length 2, 3 and 4 out of 9 elements
-    val l = List(1, 2, 3, 4, 5, 6, 7, 8, 9)
+    val l = List(1, 2, 3, 4, 5)
 
     def f(thresh1: Int, thresh2: Int)(implicit agg: ListBuffer[List[Int]]): (List[Int]) => Unit =
       l => if (l.slice(0, thresh1).isSorted
@@ -45,8 +45,8 @@ object CombSplit {
     implicit val agg = ListBuffer.empty[List[Int]]
     println("perms")
     val thresh1 = 2
-    val thresh2 = 5
-    nonRepeatingPerm(l, 9, f(thresh1, thresh2))
+    val thresh2 = 3
+    nonRepeatingPerm(l, 5, f(thresh1, thresh2))
     println(agg.map(_.foldLeft("")(_ + _)).sortWith((a, b) => a < b))
     println(agg.size)
   }
