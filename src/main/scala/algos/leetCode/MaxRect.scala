@@ -8,7 +8,7 @@ object MaxRect {
 
   case class MaxRectInfo(sq: Int, right: Int, width: Int, height: Int)
 
-  def largestRectangleArea(height: Array[Int], description: String):MaxRectInfo = {
+  def largestRectangleArea(height: Array[Int], description: String): MaxRectInfo = {
     if (height == null || height.length == 0) return null
     val startTime = System.currentTimeMillis();
 
@@ -16,7 +16,7 @@ object MaxRect {
     var stack = Stack[Integer]()
     var max = 0;
     var i: Integer = 0;
-    var mrinfo: Option[MaxRectInfo] = None
+    var mrinfo: MaxRectInfo = MaxRectInfo(height(0), 0, 1, height(0))
     while (i < height.length) {
       //push index to stack when the current height is larger than the previous one
       if (stack.isEmpty || height(i) >= height(stack.top)) {
@@ -31,7 +31,7 @@ object MaxRect {
         val w: Int = if (stack.isEmpty) i else i - stack.top - 1
         if (Math.max(h * w, max) > max) {
           max = Math.max(h * w, max);
-          mrinfo = Some(MaxRectInfo(max, i - 1, w, h))
+          mrinfo = MaxRectInfo(max, i - 1, w, h)
         }
       }
     }
@@ -42,17 +42,17 @@ object MaxRect {
       val w: Int = if (stack.isEmpty) i else i - stack.top - 1
       if (Math.max(h * w, max) > max) {
         max = Math.max(h * w, max);
-        mrinfo = Some(MaxRectInfo(max, i - 1, w, h));
+        mrinfo = MaxRectInfo(max, i - 1, w, h)
       }
     }
     val endTime = System.currentTimeMillis();
     System.out.println(description + " time ms:" + (endTime - startTime));
 
-    mrinfo.orNull
+    mrinfo
   }
 
   def main(args: Array[String]): Unit = {
-    val arr =Array(2,1,5,6,2,3)
-    println(largestRectangleArea(arr,"stack version"))
+    val arr = Array(2, 1, 5, 6, 2, 3)
+    println(largestRectangleArea(arr, "stack version"))
   }
 }
