@@ -1,5 +1,5 @@
 package algos.leetCode
-import scala.collection.mutable.ListBuffer
+import scala.collection.mutable.{ArrayBuffer}
 
 /**
   * Created by Ilya Volynin on 15.06.2019 at 17:12.
@@ -7,8 +7,7 @@ import scala.collection.mutable.ListBuffer
 object Candy {
 
   def candy(ratings: Array[Int]): Int = {
-    val listOfMins = ListBuffer[Int]()
-//        val candies = new Array[Int](ratings.length)
+    val listOfMins = ArrayBuffer[Int]()
     var i = 0
     var j = 0
     if (ratings.length == 0) return 0
@@ -25,11 +24,9 @@ object Candy {
     //left border
     if (listOfMins(0) != 0) {
       j = listOfMins(0)
-//            candies(j) = 1
       while (j > 0) {
         temp = temp + 1
         total += temp
-//                candies(j - 1) = candies(j) + 1
         j = j - 1
       }
     }
@@ -37,9 +34,7 @@ object Candy {
     temp = 1
     if (listOfMins.last != ratings.length - 1) {
       j = listOfMins.last
-
       while (j < ratings.length - 1) {
-//        candies(j + 1) = candies(j) + 1
         temp = temp + 1
         total += temp
         j = j + 1
@@ -57,13 +52,11 @@ object Candy {
           println(s"x=$x,y=$y")
           while (j > i && (i + 1 != j || ratings(i) != ratings(j))) {
             if (ratings(i + 1) > ratings(i) && j > i) {
-//              candies(i + 1) = candies(i) + 1
               temp1 = temp1 + 1
               total += temp1
               i = i + 1
             }
             if (ratings(j - 1) > ratings(j) && j > i) {
-//              candies(j - 1) = candies(j) + 1
               temp2 = temp2 + 1
               total += temp2
               j = j - 1
@@ -71,8 +64,7 @@ object Candy {
           }
           if (i == j) {
             println(s"i=j,$i")
-//            candies(i) = Math.max(candies(i - 1) + 1, candies(i + 1) + 1)
-            total-=Math.min(temp1,temp2)
+            total -= Math.min(temp1, temp2)
           }
         }
       }
@@ -82,6 +74,6 @@ object Candy {
   }
 
   def main(args: Array[String]): Unit = {
-    println(candy(Array(1, 0,2)))
+    println(candy(Array(1, 2, 2)))
   }
 }
