@@ -2,9 +2,12 @@ package cats.example
 import cats._
 import cats.instances.all._
 import cats.syntax.functor._
+import fastparse.core.Parsed
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 import scala.util.Success
+import utils.ImplicitExtensions._
+import scala.util.control.NonFatal
 
 object Hello extends App {
 
@@ -28,5 +31,17 @@ object Hello extends App {
   println(s"|@|: " + (lst1, lst2).mapN((a, b) => (a + b)))
 
   (Future(1), Future(2)).mapN((a, b) => a + b).andThen { case Success(x) => println(x) }
+
+  val cValNone: Option[Int] = None
+  val cValSome: Option[Int] = Some(3)
+
+  (Some(1).toTry(new IllegalArgumentException("should be 1")),
+    Some(2).toTry(new IllegalArgumentException("should be 2")),
+    cValSome.toTry(new IllegalArgumentException("should be something"))
+  ).mapN {
+    (a, b, c) =>
+      println(s"success: $c")
+      c
+  }.recover { case NonFatal(e) => println(s"exc ${e.getMessage}") }
 }
 
