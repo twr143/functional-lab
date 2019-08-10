@@ -14,3 +14,5 @@ import freestyle.free.loggingJVM.implicits._
   val validation: Validation.StackSafe
   val log: LoggingM
 }
+
+
