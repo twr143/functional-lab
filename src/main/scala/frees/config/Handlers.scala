@@ -8,7 +8,7 @@ import freestyle.free.implicits._
   */
 object Handlers {
   implicit val issuesServiceHandler: IssuesService.Handler[Try] = new IssuesService.Handler[Try] {
-    def states: Try[List[String]] = Success(List("open", "reverted", "in progress", "closed"))
+    def states: Try[Set[String]] = Success(Set("open", "reverted", "in progress", "closed"))
   }
 
 }
