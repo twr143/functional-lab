@@ -1,4 +1,4 @@
-package algos.leetCode
+package algos.leetCode.reverse
 /**
   * Created by Ilya Volynin on 09.11.2019 at 11:40.
   */
