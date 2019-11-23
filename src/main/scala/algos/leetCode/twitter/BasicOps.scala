@@ -13,8 +13,8 @@ object BasicOps {
 //    tw.postTweet(2,6)
 //    println(tw.getNewsFeed(1))
 
-    tw.postTweet(1,3)
     tw.postTweet(1,5)
+    tw.postTweet(1,3)
 //    tw.postTweet(1,7)
 //    tw.postTweet(1,9)
 //    tw.postTweet(1,11)

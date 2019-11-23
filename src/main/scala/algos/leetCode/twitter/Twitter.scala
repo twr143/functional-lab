@@ -8,20 +8,23 @@ import scala.collection.mutable.ArrayBuffer
 class Twitter() {
 
   /** Initialize your data structure here. */
-  case class Tweet(userId: Int, tweetId: Int)
+  case class Tweet(userId: Int, tweetId: Int, index: Int)
 
   val tweets = mutable.Map.empty[Int, mutable.TreeSet[Tweet]]
 
   val followers = mutable.Map.empty[Int, mutable.Set[Int]]
 
   val orderingtweets = new Ordering[Tweet] {
-    def compare(o1: Tweet, o2: Tweet): Int = o2.tweetId - o1.tweetId
+    def compare(o1: Tweet, o2: Tweet): Int = o2.index - o1.index
   }
+
+  var index: Int = 0
 
   /** Compose a new tweet. */
   def postTweet(userId: Int, tweetId: Int) {
-    if (!tweets.contains(userId)) tweets += userId -> mutable.TreeSet(Tweet(userId, tweetId))(orderingtweets)
-    else tweets(userId) += Tweet(userId, tweetId)
+    if (!tweets.contains(userId)) tweets += userId -> mutable.TreeSet(Tweet(userId, tweetId, index))(orderingtweets)
+    else tweets(userId) += Tweet(userId, tweetId, index)
+    index += 1
   }
 
   /** Retrieve the 10 most recent tweet ids in the user's news feed.
@@ -34,7 +37,7 @@ class Twitter() {
       if (tweets.contains(f)) arr += tweets(f)
     })
     if (tweets.contains(userId)) arr += tweets(userId)
-    mergeKSortedSetsTakeN(arr, 10)(orderingtweets).map(_.tweetId).toList.reverse
+    mergeKSortedSetsTakeN(arr, 10)(orderingtweets).toList.map(_.tweetId)
   }
 
   def mergeKSortedSetsTakeN(sets: ArrayBuffer[mutable.TreeSet[Tweet]], limit: Int)
@@ -59,7 +62,7 @@ class Twitter() {
 
   def findMax2(set: mutable.Set[(Int, Tweet)]): (Int, Tweet) = {
     val orderingPairsByVals = new Ordering[(Int, Tweet)] {
-      def compare(o1: (Int, Tweet), o2: (Int, Tweet)): Int = o1._2.tweetId - o2._2.tweetId
+      def compare(o1: (Int, Tweet), o2: (Int, Tweet)): Int = o1._2.index - o2._2.index
     }
     set.max(orderingPairsByVals)
   }
